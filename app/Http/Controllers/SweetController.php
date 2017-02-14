@@ -22,4 +22,22 @@ class SweetController extends Controller
 
     	return back();
     }
+
+    public function decreaseStock ($id) {
+    	$sweet = Sweet::find($id);
+    	$sweet->stock--;
+
+    	$sweet->save();
+
+    	return response($sweet->stock);
+    }
+
+    public function increaseStock ($id) {
+    	$sweet = Sweet::find($id);
+    	$sweet->stock++;
+
+    	$sweet->save();
+
+    	return response($sweet->stock);
+    }
 }

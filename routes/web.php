@@ -14,3 +14,7 @@
 Route::get('/', 'SweetController@getSweet');
 
 Route::post('/addSweet', 'SweetController@postSweet');
+
+Route::post('/decreaseStock/{id}', 'SweetController@decreaseStock');
+
+Route::post('/increaseStock/{id}', 'SweetController@increaseStock');

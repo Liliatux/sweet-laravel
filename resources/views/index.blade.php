@@ -24,9 +24,16 @@
     <div class="row">
         <div class="column">
             @foreach($sweets as $sweet)
-            <div class="ui compact segment">
-                <h5 class="ui header">{{$sweet->name}}</h5>
-                <span>{{$sweet->stock}}</span>
+            <div class="ui compact floated segment">
+                <h5 class="ui header">Bonbon {{$sweet->name}}</h5>
+                <form action="/decreaseStock" method="post" class="decrease">
+                    <input type="hidden" id="stockId" value="{{$sweet->id}}">
+                    <button type="submit" class="ui tiny red button"><i class="minus icon"></i></button>
+                </form>
+                Stock: <span class="newStock">{{$sweet->stock}}</span>
+                <form action="/increaseStock" method="post" class="increase">
+                    <button type="submit" class="ui tiny green button"><i class="add icon"></i></button>
+                </form>
             </div>
             @endforeach
         </div>
