@@ -1,49 +1,36 @@
 (function () {
 	var app = {
 
-		id: document.getElementById('stockId').value,
-
 		init: function () {
 			this.listeners();
 		},
 
 		listeners: function() {
-			$('.decrease').on('submit', this.decreaseStock.bind(this));
-			$('.increase').on('submit', this.increaseStock.bind(this));
+			$(".decrease").on("click", this.decreaseStock);
+			$(".increase").on("click", this.increaseStock);
 		},
 
-		decreaseStock: function(e) {
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			});
-
-			e.preventDefault();
+		decreaseStock: function() {
+			 let id = $(this).data("id");
 			$.ajax({
-				url: '/decreaseStock/' + this.id,
-				type: 'POST',
-				success: this.successStock
+				url: '/decreaseStock/' + id,
+				type: 'get',
+				success: app.successStock
 			});
 		},
 
-		increaseStock:function(e) {
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			});
-
-			e.preventDefault();
+		increaseStock:function() {
+			let id = $(this).data("id");
 			$.ajax({
-				url: '/increaseStock/' + this.id,
-				type: 'POST',
-				success: this.successStock
+				url: '/increaseStock/' + id,
+				type: 'get',
+				success: app.successStock
 			});
 		},
 
-		successStock: function($response) {
-			$(".newStock").html($response);
+		successStock: function(response){
+			//console.log(response);
+			$('[data-id="'this.id'"]').html(response);
 		}
 	}
 
